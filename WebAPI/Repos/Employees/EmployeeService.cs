@@ -1,6 +1,9 @@
 ﻿using Logger;
+using Microsoft.AspNetCore.Http;
 using Npgsql;
 using WebAPI.Models;
+using WebAPI.UtilityFunctions;
+
 namespace WebAPI.Repos.Employees
 {
     /// <summary>
@@ -22,7 +25,6 @@ namespace WebAPI.Repos.Employees
         /// <returns>returns a string informing the caller of result</returns>
         public string Create(EmployeeDTO employee)
         {
-
             string queryExsisting = "SELECT Id FROM public.Employees where Email = @email";
             try
             {
@@ -39,7 +41,6 @@ namespace WebAPI.Repos.Employees
                     {
                         while (reader.Read())
                         {
-
                             if (!reader.IsDBNull(0))
                             {
                                 int id = reader.GetInt32(0);
@@ -148,60 +149,14 @@ namespace WebAPI.Repos.Employees
             try
             {
                 dynamic convertedValue;
-                bool success;
-                switch (column.ToLower())
+               
+                if(TypeVerifcation.VerifyType(column, value,out convertedValue))
                 {
-                    case "id":
-                        queryString = $"SELECT * FROM public.employees where cast({column} as text) LIKE @value order by id ASC;";
-                        int intOutParam;
-                        success = int.TryParse(value, out intOutParam);
-                        if (success)
-                        {
-                            convertedValue = value +"%";
-                        }
-                        else
-                        {
-                            return employees;
-                        }
-                        break;
-
-                    case "firstname":
-                    case "email":
-                    case "lastname":
-                        convertedValue = value + "%";
-                        queryString = $"SELECT * FROM public.employees where lower({column}) LIKE lower(@value) order by id ASC;";
-                        break;
-
-                    case "dateofbirth":
-                        DateTime outParam;
-                        success =DateTime.TryParse(value, out outParam);
-                        if (success)
-                        {
-                            convertedValue = outParam;
-                        }
-                        else
-                        {
-                            return employees;
-                        }
-                        queryString = $"SELECT * FROM public.employees where {column} = @value order by id ASC;";
-                        break;
-
-                    case "currentlyemployed":
-                        bool convertedBool;
-                        success= bool.TryParse(value, out convertedBool);
-                        queryString = $"SELECT * FROM public.employees where {column} = @value order by id ASC;";
-                        if (success)
-                        {
-                            convertedValue = convertedBool;
-                        }
-                        else
-                        {
-                            return employees;
-                        }
-                        break;
-
-                    default:
-                        return employees;     
+                    queryString= TypeVerifcation.FindAppropriateQueryString(column);
+                }
+                else
+                {
+                    return employees;
                 }
 
                 using (NpgsqlConnection connection = new NpgsqlConnection(_configuration.GetConnectionString("db")))
