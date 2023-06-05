@@ -2,7 +2,6 @@
 using Logger;
 using Newtonsoft.Json;
 using RestSharp;
-
 namespace UserInterface.UtilityFunctions
 {
     /// <summary>
@@ -43,7 +42,6 @@ namespace UserInterface.UtilityFunctions
                 SimpleLogger.Log(e);
                 throw;
             }
-         
         }
         /// <summary>
         /// Makes a update request to the WebAPI.
@@ -79,7 +77,6 @@ namespace UserInterface.UtilityFunctions
                 SimpleLogger.Log(e);
                 throw;
             }
-            
         }
         /// <summary>
         /// Makes a get request to the WebAPI.
@@ -92,12 +89,10 @@ namespace UserInterface.UtilityFunctions
         /// <returns></returns>
         public static List<Employee> GetEmployees(string field, string value, RestClient client)
         {
-
             try
             {
                 if (string.IsNullOrEmpty(field) || string.IsNullOrWhiteSpace(field) || string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
                 {
-
                     RestRequest employeeListRequest = new RestRequest($"GetEmployeeList", Method.Get);
 
                     Task<RestResponse> employeeListResponse = client.GetAsync(employeeListRequest);
@@ -122,9 +117,6 @@ namespace UserInterface.UtilityFunctions
                 SimpleLogger.Log(e);
                 throw;
             }
-
         }
-
     }
-
 }

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace WebAPI.Models
-
 {
     public class Employee
     {
@@ -49,7 +48,5 @@ namespace WebAPI.Models
         public DateTime DateOfBirth { get; set; }
         [Required]
         public bool CurrentlyEmployed { get; set; }
-
     }
-
 }

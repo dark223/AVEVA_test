@@ -1,5 +1,4 @@
 ﻿using Logger;
-
 namespace UserInterface.UtilityFunctions
 {
     public class UiVerification
@@ -33,7 +32,10 @@ namespace UserInterface.UtilityFunctions
                 {
                     message = $"date of birth is not a valid date, please choose another";
                 }
-                else { message = "valid"; }
+                else 
+                {
+                    message = "valid";
+                }
 
                 return message;
             }
@@ -42,8 +44,6 @@ namespace UserInterface.UtilityFunctions
                 SimpleLogger.Log(e);
                 throw;
             }
-
-            
         }
     }
 }

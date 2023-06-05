@@ -1,7 +1,6 @@
 using AVEVA_code_test.Models;
 using RestSharp;
 using UserInterface.UtilityFunctions;
-
 namespace AVEVA_code_test
 {
     /// <summary>
@@ -9,7 +8,6 @@ namespace AVEVA_code_test
     /// </summary>
     public partial class Form1 : Form
     {
-
         RestClient client = new RestClient("https://localhost:7057/Employee/");
 
         public Form1()
@@ -32,14 +30,10 @@ namespace AVEVA_code_test
         {
             CreateEmployeePanel.BringToFront();
         }
-
         #endregion
-
-        
 
         private void SearchDropDown_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
             string selectedItem = SearchDropDown.SelectedItem.ToString();
             switch (selectedItem)
             {
@@ -104,11 +98,7 @@ namespace AVEVA_code_test
             {
                 EmployeeDataGridView.DataSource = result;
             }
-
         }
-
-       
-
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
@@ -118,7 +108,7 @@ namespace AVEVA_code_test
            DateTime dateOfBirth = CreateDateOfBirthPicker.Value;
            bool currentlyEmployed = CreateCurrentlyEmployedCheckBox.Checked;
 
-          string message = UiVerification.VerifyInputOfEmpolyee(firstName,lastName,email,dateOfBirth);
+           string message = UiVerification.VerifyInputOfEmpolyee(firstName,lastName,email,dateOfBirth);
 
             if (message =="valid")
             {
@@ -133,9 +123,7 @@ namespace AVEVA_code_test
                 MessageCreateEmployee.ForeColor= Color.Red;
                 MessageCreateEmployee.Text = message;
             }
-
         }
-
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
@@ -168,6 +156,5 @@ namespace AVEVA_code_test
                 UpdateEmployeeMessage.Text = message;
             }
         }
-
     }
 }

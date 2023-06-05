@@ -1,7 +1,6 @@
 ﻿using Logger;
 using Npgsql;
 using WebAPI.Models;
-
 namespace WebAPI.Repos.Employees
 {
     /// <summary>
@@ -47,9 +46,7 @@ namespace WebAPI.Repos.Employees
                                 SimpleLogger.Log("employee with the Id already exists: " + id);
                                 return "Already exists";
                             }
-
                         }
-
                     }
                 }
             }
@@ -58,7 +55,6 @@ namespace WebAPI.Repos.Employees
                 SimpleLogger.Log(e);
                 throw;
             }
-
 
             string Insert = "INSERT INTO public.employees(FirstName, LastName, Email, DateOfBirth, CurrentlyEmployed) VALUES( @firstname, @lastname, @email, @dateofbirth, @currentlyemployed); ";
             try
@@ -79,12 +75,9 @@ namespace WebAPI.Repos.Employees
                     cmd.Parameters.Add(param[4]);
                     cmd.Connection.Open();
                     cmd.ExecuteNonQuery();
-
                 }
 
-
                 return "Employee created";
-
             }
             catch (Exception e)
             {
@@ -92,7 +85,6 @@ namespace WebAPI.Repos.Employees
                 return "Failed to create employee";
             }
         }
-
 
         /// <summary>
         /// Gets a list of all employees
@@ -104,7 +96,6 @@ namespace WebAPI.Repos.Employees
 
             try
             {
-
                 using (NpgsqlConnection Connection = new NpgsqlConnection(_configuration.GetConnectionString("db")))
                 {
                     NpgsqlCommand cmd = new NpgsqlCommand(queryString, Connection);
@@ -114,10 +105,8 @@ namespace WebAPI.Repos.Employees
 
                     List<Employee> employees = new List<Employee>();
 
-
                     while (reader.Read())
                     {
-
                         if (!reader.IsDBNull(0) && !reader.IsDBNull(1) && !reader.IsDBNull(2) && !reader.IsDBNull(3) && !reader.IsDBNull(4) && !reader.IsDBNull(5))
                         {
                             int id = reader.GetInt32(0);
@@ -132,12 +121,10 @@ namespace WebAPI.Repos.Employees
                         {
                             SimpleLogger.Log("Get request skipped employee with the Id: " + reader.GetInt32(0));
                         }
-
                     }
 
                     return employees;
                 }
-
             }
             catch (Exception e)
             {
@@ -154,7 +141,6 @@ namespace WebAPI.Repos.Employees
         /// <returns>returns a list of employees</returns>
         public IEnumerable<Employee> Get(string column, string value)
         {
-
             string queryString;
             column = column.Replace(" ", "");
             value = value.TrimStart();
@@ -165,7 +151,6 @@ namespace WebAPI.Repos.Employees
                 bool success;
                 switch (column.ToLower())
                 {
-
                     case "id":
                         queryString = $"SELECT * FROM public.employees where cast({column} as text) LIKE @value order by id ASC;";
                         int intOutParam;
@@ -216,11 +201,8 @@ namespace WebAPI.Repos.Employees
                         break;
 
                     default:
-                        return employees;
-                      
+                        return employees;     
                 }
-
-
 
                 using (NpgsqlConnection connection = new NpgsqlConnection(_configuration.GetConnectionString("db")))
                 {
@@ -232,10 +214,8 @@ namespace WebAPI.Repos.Employees
                     cmd.Connection.Open();
                     var reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
 
-
                     while (reader.Read())
                     {
-
                         if (!reader.IsDBNull(0) && !reader.IsDBNull(1) && !reader.IsDBNull(2) && !reader.IsDBNull(3) && !reader.IsDBNull(4) && !reader.IsDBNull(5))
                         {
                             int id = reader.GetInt32(0);
@@ -250,12 +230,10 @@ namespace WebAPI.Repos.Employees
                         {
                             SimpleLogger.Log("Get-request skipped employee with the Id: " + reader.GetInt32(0));
                         }
-
                     }
 
                     return employees;
                 }
-
             }
             catch (Exception e)
             {
@@ -265,8 +243,6 @@ namespace WebAPI.Repos.Employees
             }
         }
         
-        
-
         /// <summary>
         /// Updates an employee.
         /// id is used to find the specific employee to update
@@ -275,12 +251,10 @@ namespace WebAPI.Repos.Employees
         /// <returns>returns a string of the updating status</returns>
         public string Update(Employee employee)
         {
-
             string queryString = "SELECT * FROM public.employees where Id = @id";
 
             try 
             {
-
                 using (NpgsqlConnection connection = new NpgsqlConnection(_configuration.GetConnectionString("db")))
                 {
                     NpgsqlCommand cmd = new NpgsqlCommand(queryString, connection);
@@ -296,7 +270,6 @@ namespace WebAPI.Repos.Employees
                         Employee retrivedEmployee;
                         while (reader.Read())
                         {
-
                             if (!reader.IsDBNull(0) && !reader.IsDBNull(1) && !reader.IsDBNull(2) && !reader.IsDBNull(3) && !reader.IsDBNull(4) && !reader.IsDBNull(5))
                             {
                                 int id = reader.GetInt32(0);
@@ -307,7 +280,6 @@ namespace WebAPI.Repos.Employees
                                 bool currentlyEmployed = reader.GetBoolean(5);
                                 retrivedEmployee = new Employee(id, firstName, lastName, email, dateOfBirth, currentlyEmployed);
                             }
-                            
                         }
                         reader.Close();
                         string update = "UPDATE public.Employees SET  FirstName=@firstname, LastName = @lastname, Email=@email, DateOfBirth= @dateofbirth, CurrentlyEmployed= @currentlyemployed WHERE Id=@Id";
@@ -334,17 +306,13 @@ namespace WebAPI.Repos.Employees
                     {
                         return "Employee not found";
                     }
-
                 }
-
             }
             catch (Exception e)
             {
                 SimpleLogger.Log(e);
                 throw;
             }
-
         }
     }
-    
 }

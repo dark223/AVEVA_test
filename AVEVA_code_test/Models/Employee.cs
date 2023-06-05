@@ -59,7 +59,5 @@ namespace AVEVA_code_test.Models
         public DateTime DateOfBirth { get; set; }
         [Required]
         public bool CurrentlyEmployed { get; set; }
-
     }
-
 }

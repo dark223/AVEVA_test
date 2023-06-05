@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Text;
-
+﻿using System.Text;
 namespace Logger
 {
     /// <summary>
@@ -11,10 +9,8 @@ namespace Logger
     /// </summary>
     public static class SimpleLogger
     {
-
         public static async void Log(Exception e)
         {
-
             try
             {
                 string workingDirectory = Environment.CurrentDirectory;
@@ -27,7 +23,6 @@ namespace Logger
                 sb.Append("StackTrace: " + e.StackTrace + "\n");
 
                 await File.AppendAllTextAsync(workingDirectory + "/log.txt", sb.ToString());
-                
             }
             catch (Exception ex)
             {
@@ -35,7 +30,6 @@ namespace Logger
                 Console.WriteLine(ex.StackTrace);
                 throw;
             }
-
         }
 
         public static async void Log(string text)
@@ -50,7 +44,6 @@ namespace Logger
                 sb.Append("Text: " + text + "\n");
 
                 await File.AppendAllTextAsync(workingDirectory + "/log.txt", sb.ToString());
-
             }
             catch (Exception e)
             {
@@ -58,10 +51,6 @@ namespace Logger
                 Console.WriteLine(e.StackTrace);
                 throw;
             }
-
-
         }
-
-
     }
 }

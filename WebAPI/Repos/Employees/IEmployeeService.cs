@@ -12,7 +12,5 @@ namespace WebAPI.Repos.Employees
         string Update(Employee employee);
 
         string Create(EmployeeDTO employee);
-
-
     }
 }

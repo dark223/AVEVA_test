@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models;
 using WebAPI.Repos.Employees;
-
 namespace WebAPI.Controllers
 {
     /// <summary>
@@ -10,8 +9,7 @@ namespace WebAPI.Controllers
     [ApiController]
     [Route("[controller]")]
     public class EmployeeController : ControllerBase
-    {
-        
+    { 
         private readonly IEmployeeRopo _EmployeeRepo;
 
         public EmployeeController( IEmployeeRopo EmployeeRepo)
@@ -68,7 +66,6 @@ namespace WebAPI.Controllers
 
                 default: return BadRequest(result);
             }
-
         }
 
         /// <summary>
@@ -80,7 +77,7 @@ namespace WebAPI.Controllers
         public IActionResult Put([FromBody] Employee employee)
         {
             string result;
-           if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 result = _EmployeeRepo.Update(employee);
             }
