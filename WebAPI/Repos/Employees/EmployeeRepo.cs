@@ -144,9 +144,9 @@ namespace WebAPI.Repos.Employees
             {
                 dynamic convertedValue;
                
-                if(TypeVerifcation.VerifyType(column, value,out convertedValue))
+                if(SqlPreparation.VerifyType(column, value,out convertedValue))
                 {
-                    queryString= TypeVerifcation.FindAppropriateQueryString(column);
+                    queryString= SqlPreparation.FindAppropriateQueryString(column);
                 }
                 else
                 {

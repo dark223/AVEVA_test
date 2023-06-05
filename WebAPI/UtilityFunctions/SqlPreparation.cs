@@ -1,13 +1,15 @@
 ﻿namespace WebAPI.UtilityFunctions
 {
-    public class TypeVerifcation
+    public class SqlPreparation
     {
-        /// <summary>
-        /// Checks if the value can be converted to the needed type
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="column"></param>
-        /// <returns>returns true if it succeeds in doing so else, it returns false</returns>
+     /// <summary>
+     /// Checks if the value can be converted to the needed typ
+     /// </summary>
+     /// <param name="column"></param>
+     /// <param name="value"></param>
+     /// <param name="convertedValue">value covereted to the needed type for sql search.
+     /// id,firstname,lastname and email will be convereted to string to make use of Like in the sql search</param>
+     /// <returns>returns true if it succeeds in doing so else, it returns false</returns>
         public static bool VerifyType(string column, string value, out dynamic convertedValue)
         {
             bool success;
