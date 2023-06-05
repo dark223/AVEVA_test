@@ -110,13 +110,7 @@ namespace WebAPI.Repos.Employees
                     {
                         if (!reader.IsDBNull(0) && !reader.IsDBNull(1) && !reader.IsDBNull(2) && !reader.IsDBNull(3) && !reader.IsDBNull(4) && !reader.IsDBNull(5))
                         {
-                            int id = reader.GetInt32(0);
-                            string firstName = reader.GetString(1);
-                            string lastName = reader.GetString(2);
-                            string email = reader.GetString(3);
-                            DateTime dateOfBirth = reader.GetDateTime(4);
-                            bool currentlyEmployed = reader.GetBoolean(5);
-                            employees.Add(new Employee(id, firstName, lastName, email, dateOfBirth, currentlyEmployed));
+                            employees.Add(new Employee(id: reader.GetInt32(0), firstName: reader.GetString(1), lastName: reader.GetString(2), email: reader.GetString(3), dateOfBirth:reader.GetDateTime(4), currentlyEmployed: reader.GetBoolean(5)));
                         }
                         else
                         {
@@ -173,13 +167,7 @@ namespace WebAPI.Repos.Employees
                     {
                         if (!reader.IsDBNull(0) && !reader.IsDBNull(1) && !reader.IsDBNull(2) && !reader.IsDBNull(3) && !reader.IsDBNull(4) && !reader.IsDBNull(5))
                         {
-                            int id = reader.GetInt32(0);
-                            string firstName = reader.GetString(1);
-                            string lastName = reader.GetString(2);
-                            string email = reader.GetString(3);
-                            DateTime dateOfBirth = reader.GetDateTime(4);
-                            bool currentlyEmployed = reader.GetBoolean(5);
-                            employees.Add(new Employee(id, firstName, lastName, email, dateOfBirth, currentlyEmployed));
+                            employees.Add(new Employee(id: reader.GetInt32(0), firstName: reader.GetString(1), lastName: reader.GetString(2), email: reader.GetString(3), dateOfBirth: reader.GetDateTime(4), currentlyEmployed: reader.GetBoolean(5)));
                         }
                         else
                         {
