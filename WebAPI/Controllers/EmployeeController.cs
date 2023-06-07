@@ -62,7 +62,7 @@ namespace WebAPI.Controllers
                     return Ok(result);
 
                 case "Already exists":
-                    return Conflict(result);
+                    return Ok("Already exists");
 
                 default: return BadRequest(result);
             }
@@ -92,7 +92,7 @@ namespace WebAPI.Controllers
                     return Ok(result);
 
                 case "Employee not found":
-                    return NotFound();
+                    return NotFound("Employee not found");
 
                 default: return BadRequest(result);
             }

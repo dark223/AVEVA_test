@@ -33,8 +33,6 @@ namespace AVEVA_code_test.Models
 
    public struct EmployeeDTO
     {
-        private bool currentlemployed;
-
         public EmployeeDTO(string firstname, string lastname, string email, DateTime dateofbirth, bool currentlemployed) : this()
         {
             FirstName = firstname;

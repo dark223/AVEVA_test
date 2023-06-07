@@ -9,7 +9,7 @@ namespace Logger
     /// </summary>
     public static class SimpleLogger
     {
-        public static async void Log(Exception e)
+        public static void Log(Exception e)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace Logger
                 sb.Append("Message: " + e.Message + "\n");
                 sb.Append("StackTrace: " + e.StackTrace + "\n");
 
-                await File.AppendAllTextAsync(workingDirectory + "/log.txt", sb.ToString());
+                File.AppendAllText(workingDirectory + "/log.txt", sb.ToString());
             }
             catch (Exception ex)
             {
@@ -32,7 +32,7 @@ namespace Logger
             }
         }
 
-        public static async void Log(string text)
+        public static void Log(string text)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace Logger
                 sb.Append("Time: " + DateTime.Now + "\n");
                 sb.Append("Text: " + text + "\n");
 
-                await File.AppendAllTextAsync(workingDirectory + "/log.txt", sb.ToString());
+               File.AppendAllText(workingDirectory + "/log.txt", sb.ToString());
             }
             catch (Exception e)
             {
@@ -51,6 +51,7 @@ namespace Logger
                 Console.WriteLine(e.StackTrace);
                 throw;
             }
+            
         }
     }
 }
